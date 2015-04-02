@@ -9,7 +9,7 @@
 \usepackage{amsmath}
 \usepackage{subfigure}
 \usepackage{epsfig}	
-
+\usepackage{graphicx, enumitem}
 
 \title{{\bf PHY566 Group Assignment }}
 \author{Group A\\ Tong Zhu, Jiyingmei Wang, Aritro Pathak, Ankur Manikandan}
@@ -17,10 +17,23 @@
 
 \begin{document}
 \maketitle
+
+
+\begin{abstract}
+A random walk is a mathematical formalization of a path that consists of a succession of random steps. The term random walk was first introduced by Karl Pearson in 1905.  Random walks have been used in many fields: ecology, economics, psychology, computer science, physics, chemistry, and biology.  Random walks explain the observed behaviors of many processes in these fields, and thus serve as a fundamental model for the recorded stochastic activity. 
+
+One of the main applications of random walk is to trace the path of a molecule as it travels in a liquid or gas. These molecules are constantly buffeted by the molecules around them, a consequence of the molecular nature of matter. They exhibit random walks, where each "step" is in a random direction relative to the one that preceded it.
+
+The type of motion that describes such random motion of particles is known as, Brownian motion. Brownian motion is among the simplest of the continuous-time stochastic (or probabilistic) processes, and it is a limit of both simpler and more complicated stochastic processes. 
+\end{abstract}
+
+%%%%%%%%%%%%%%%
+
 \section{2D random walk}
-  In this part, we would do a problem about random walk in 2 dimensions, taking steps of unit length in $\pm$x or $\pm$y direction on a discrete square lattice.
-\subsection{Part(a)}
-  In this part,we plot $\left \langle x_n \right\rangle$ and $\left \langle {x_n}^2 \right\rangle$ up to n=100 by averaging over at least 104 different walks. The result are shown in Fig.\ref{figrw1}.
+\subsection{Introduction}
+In this part, we would do a problem about random walk in 2 dimensions, taking steps of unit length in $\pm$x or $\pm$y direction on a discrete square lattice.
+\subsection{Results}
+In this part,we plot $\left \langle x_n \right\rangle$ and $\left \langle {x_n}^2 \right\rangle$ up to n=100 by averaging over at least 104 different walks. The result are shown in Fig.\ref{figrw1}.
 
 \begin{figure}[h]
 \begin{center}
@@ -32,8 +45,7 @@
 
 You can see that the $\left \langle x_n \right\rangle$ is always zero which is agree with our expectation. For the random walk is walking randomly along +x direction and -x direction, so the average of that would be zero after many times of random walks. As you can see that correlation between $\left \langle {x_n}^2 \right\rangle$ and n is linearly, and the ratio is like 0.5. The reason for that is that the random walks in two axis, neither $\pm$x direction or $\pm$y direction, so the probability of walking in $\pm$x direction is almost 0.5 which is also agree with our results.
 
-\subsection{Part(b)}
-  By seeing the mean square distance from the starting point < r2 > up to 100 times by averaging over at least 104 different walks, shown in Fig.\ref{gifrw2}, we can see that the motion is diffusive and the value of the diffusion constant after an curve fit is like 0.99995 which is very close to 1. The reason for that the mean square distance from the starting point stands for the walk of two axis (x and y), so the probability of that is equal to 1 which is agree with our plot.
+By seeing the mean square distance from the starting point < r2 > up to 100 times by averaging over at least 104 different walks, shown in Fig.\ref{gifrw2}, we can see that the motion is diffusive and the value of the diffusion constant after an curve fit is like 0.99995 which is very close to 1. The reason for that the mean square distance from the starting point stands for the walk of two axis (x and y), so the probability of that is equal to 1 which is agree with our plot.
   
 \begin{figure}[h]
 \begin{center}
@@ -43,20 +55,18 @@ You can see that the $\left \langle x_n \right\rangle$ is always zero which is a
 \end{center}
 \end{figure}
 
-
-
-
-
-
+%%%%%%%%%%%%%%%
 
 \section{Diffusion Equation}
+\subsection{Introduction}
 In this section, we will solve the diffusion problem both analytically and numerically given the initial density distribution.
-\subsection{Part(a)}
-In this section, the the spatial expectation value for $\left \langle x(t)^2 \right\rangle$ is determined analytically, given a 1D Normal Distribution$\rho(x,t)$.
+\subsection{Method}
+\subsubsection{Part(a)}
+In this section, the the spatial expectation value for $\left \langle x(t)^2 \right\rangle$ is determined analytically, given a 1D Normal Distribution$\rho(x,t)$ shown in Eq.\eqref{11}
 
-\begin{equation*}
+\begin{equation}\label{11}
 \rho(x,t)=\frac{1}{\sqrt{2\pi \sigma(t)^2}}e^{-\frac{x^2}{2\sigma(t)^2}}
-\end{equation*}
+\end{equation}
 
 In general, the expected value of a measurable function of $x$, $g(x)$, given that x has a probability density function $f(x)$, is given by the inner product of f and g.
 \begin{equation*}
@@ -69,8 +79,9 @@ In this case, we substitute $g(x)$, and$f(x)$ with $x(t)^2$ and $\rho(x,t)$ rece
 \left \langle x^2 \right\rangle= \int_{-\infty}^{\infty} x^2\frac{1}{\sqrt{2\pi \sigma(t)^2}}e^{-\frac{x^2}{2\sigma(t)^2}}\, \mathrm{d}x=\sigma(t)^2
 \end{equation*}
 
-\subsection{Part(b)}
-In this subsection a program to solve the 1D diffusion equation using the finite difference form with a diffusion constant D = 2, with an initial density profile that is sharply peaked around x = 0, but extends over a few grid sites (box profile). To avoid the determination of the number of  particles  that are involved in this diffusion system, we use the notion of probability to study such system. Fig.\ref{fig1} illustrates the initial probability density.
+\subsubsection{Part(b)}
+In this subsection a program to solve the 1D diffusion equation using the finite difference form with a diffusion constant D = 2, with an initial density profile that is sharply peaked around x = 0, but extends over a few grid sites (box profile). To avoid the determination of the number of  particles  that are involved in this diffusion system, we use the notion of probability to study such system. 
+Fig.\ref{fig1} illustrates the initial probability density.
 
 \begin{figure}[htbp]
 \begin{center}
@@ -86,9 +97,11 @@ Then we apply the finite difference form of the diffusion equation to solve the 
 \rho(t+dt,x)=\rho(t,x)+D\frac{\Delta t}{{\Delta x}^2}[\rho(t,x+dx)+\rho(t,x-dx)-2\rho(t,x)]
 \end{equation*}
 
-After that, we fit the calculated densities at later time equal to 50s, 100s, 300s, 500s and 900s corresponding to a Normal Distribution with $\sigma(t)=\sqrt{2Dt}$. Fig.\ref{fig2} shows the results.
+After that, we fit the calculated densities at later time equal to 50s, 100s, 300s, 500s and 900s corresponding to a Normal Distribution with $\sigma(t)=\sqrt{2Dt}$.
 
-\begin{figure}[htbp]
+\subsection{Results}
+ 
+ \begin{figure}[htbp]
 \begin{center}
 \epsfig{file=fit.pdf,scale=0.5}
 \caption{{\bf   Numerically calculated probability densities with the fitting line at different times }}
@@ -96,7 +109,7 @@ After that, we fit the calculated densities at later time equal to 50s, 100s, 30
 \end{center}
 \end{figure}
 
-As it can be seen from raw eyes that all the numerically calculated densities can be fitted well by the the normal distribution with $\sigma(t)=\sqrt{2Dt}$.
+Fig.\ref{fig2} shows the results. As it can be seen from raw eyes that all the numerically calculated densities can be fitted well by the the normal distribution with $\sigma(t)=\sqrt{2Dt}$.
 
 We could also compare the fitting parameter with the idea Normal Distribution with $\sigma(t)=\sqrt{2Dt}$. Table.\ref{table1} contains these values. By comparing the analytical and fit results we can verified that the numerically calculated density profile corresponds to a Normal Distribution with $\sigma(t)=\sqrt{2Dt}$ at later times. 
 
@@ -115,6 +128,80 @@ Time[s]              & $\mu$(analytical) & $\mu$(numerical)& $\sigma$(analytical
 \end{center}
 \label{table1}
 \end{table}
+
+%%%%%%%%%%%%%%%%%%
+
+\section{Mixing of two Gases}
+In the Group Assignment 1, we are asked to use random walks to simulate the mixing of two gases in 2D in a rectangular enclosure. Also, we are asked to understand the variation of linear population densities with select time-intervals. The questions posed in the assignment are as follows.
+
+\subsection{Introduction}
+Use the techniques and insights gained previously to write a program to simulate the mixing of two gases in 2D in a rectangular enclosure:
+
+\begin{enumerate}[label=(\alph*)]
+
+\item Set up a 2D grid in xy space with dimensions 600 $\times$ 400. Fully populate the left third of the grid with a gas of species "A" and the right third of the grid with a gas of species "B". The center third of the grid remains empty. Pick a random location on the grid, and have the gas particle move at random one position up/down/left/right. If the selected position is occupied, reject the move and pick another particle (you may optimize the algorithm by only picking from occupied sites). Repeat for a large number of iterations. 
+
+\item Plot the linear population densities $n_A (x)$ and $n_B (x)$ after select time-intervals. Also plot a few sample configurations of the grid at various time-steps.
+
+\item Average the densities over 100 trials for added accuracy and replot the densities.
+
+\end{enumerate}
+
+\subsection{Methods}
+We generated a grid of size 600 x 400 by populating the left third of the grid with gas species "A" and the right third with a gas species "B", leaving the centre of the grid empty. To pick a random location, that is an occupied site, on the grid we used the "random" function from the 'random' library. 
+
+We considered three different cases to move the randomly selected particle:
+
+\begin{itemize}
+
+\item $Case 1$ - If the particle is at the four corners of the grid, then it has only two degrees of freedom.
+
+\item $Case 2$ - If the particle is along the border of the grid, excluding the edges, then it has three degrees of freedom.
+
+\item $Case 3$ - If the particle is situated within the interior of the gird, then it has all four degree of freedom. 
+
+\end{itemize}
+
+In each case, the particle has an equal probability of moving in it's permissible directions. The random motion of the particles is repeated over a large number of iterations.
+
+Also, the question asked us to plot the linear population densities after select time-intervals. The population densities are calculated by counting the number of gas molecules of types "A" and "B" independently along the x-axis.
+
+For the last part of the question, we average the densities over 100 trials using a "for" loop and replot the densities at various time-steps.
+
+\subsection{Results}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \end{document}  

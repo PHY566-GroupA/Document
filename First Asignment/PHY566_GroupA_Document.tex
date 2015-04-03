@@ -1,18 +1,23 @@
-\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\documentclass[11pt, oneside]{article}  	% use "amsart" instead of "article" for AMSLaTeX format
 \usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
 \geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
 %\geometry{landscape}                		% Activate for for rotated page geometry
 %\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
 \usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
-								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{authblk}							% TeX will automatically convert eps --> pdf in pdflatex		
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{subfigure}
 \usepackage{epsfig}	
-\usepackage{graphicx, enumitem}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{url}
+\graphicspath{{images/}}
 
 \title{{\bf PHY566 Group Assignment }}
-\author{Group A\\ Tong Zhu, Jiyingmei Wang, Aritro Pathak, Ankur Manikandan}
+\author{Group A}
+\affil{Tong Zhu, Jiyingmei Wang, Aritro Pathak, Ankur Manikandan}
+
 %\date{}							% Activate to display a given date or no date
 
 \begin{document}
@@ -43,7 +48,7 @@ In this part,we plot $\left \langle x_n \right\rangle$ and $\left \langle {x_n}^
 \end{center}
 \end{figure}
 
-You can see that the $\left \langle x_n \right\rangle$ is always zero which is agree with our expectation. For the random walk is walking randomly along +x direction and -x direction, so the average of that would be zero after many times of random walks. As you can see that correlation between $\left \langle {x_n}^2 \right\rangle$ and n is linearly, and the ratio is like 0.5. The reason for that is that the random walks in two axis, neither $\pm$x direction or $\pm$y direction, so the probability of walking in $\pm$x direction is almost 0.5 which is also agree with our results.
+You can see that the $\left \langle x_n \right\rangle$ is always zero which is agree with our expectation. For the random walk is walking randomly along +x direction and -x direction, so the average of that would be zero after many times of random walks. As you can see that correlation between $\left \langle {x_n}^2 \right\rangle$ and n is linearly, and the slope is like 0.5. The reason for that is that the random walks in two axis, neither $\pm$x direction or $\pm$y direction, so the probability of walking in $\pm$x direction is almost 0.5 which is also agree with our results.
 
 By seeing the mean square distance from the starting point < r2 > up to 100 times by averaging over at least 104 different walks, shown in Fig.\ref{gifrw2}, we can see that the motion is diffusive and the value of the diffusion constant after an curve fit is like 0.99995 which is very close to 1. The reason for that the mean square distance from the starting point stands for the walk of two axis (x and y), so the probability of that is equal to 1 which is agree with our plot.
   
@@ -62,7 +67,7 @@ By seeing the mean square distance from the starting point < r2 > up to 100 time
 In this section, we will solve the diffusion problem both analytically and numerically given the initial density distribution.
 \subsection{Method}
 \subsubsection{Part(a)}
-In this section, the the spatial expectation value for $\left \langle x(t)^2 \right\rangle$ is determined analytically, given a 1D Normal Distribution$\rho(x,t)$ shown in Eq.\eqref{11}
+In this section, the spatial expectation value for $\left \langle x(t)^2 \right\rangle$ is determined analytically, given a 1D Normal Distribution$\rho(x,t)$ shown in Eq.\eqref{11}
 
 \begin{equation}\label{11}
 \rho(x,t)=\frac{1}{\sqrt{2\pi \sigma(t)^2}}e^{-\frac{x^2}{2\sigma(t)^2}}
@@ -73,14 +78,14 @@ In general, the expected value of a measurable function of $x$, $g(x)$, given th
 \left \langle g(x) \right\rangle= \int_{-\infty}^{\infty} g(x)f(x)\, \mathrm{d}x
 \end{equation*}
 
-In this case, we substitute $g(x)$, and$f(x)$ with $x(t)^2$ and $\rho(x,t)$ receptively. For every instant, t can be regarded as a constant in the integrand, hence the expected value for $x^2$ is a function of t.
+In this case, we substitute $g(x)$, and$f(x)$ with $x(t)^2$ and $\rho(x,t)$ respectively. For every instant, t can be regarded as a constant in the integrand, hence the expected value for $x^2$ is a function of t.
 
 \begin{equation*}
 \left \langle x^2 \right\rangle= \int_{-\infty}^{\infty} x^2\frac{1}{\sqrt{2\pi \sigma(t)^2}}e^{-\frac{x^2}{2\sigma(t)^2}}\, \mathrm{d}x=\sigma(t)^2
 \end{equation*}
 
 \subsubsection{Part(b)}
-In this subsection a program to solve the 1D diffusion equation using the finite difference form with a diffusion constant D = 2, with an initial density profile that is sharply peaked around x = 0, but extends over a few grid sites (box profile). To avoid the determination of the number of  particles  that are involved in this diffusion system, we use the notion of probability to study such system. 
+In this subsection, a program is written to solve the 1D diffusion equation using the finite difference form with a diffusion constant D = 2, with an initial density profile that is sharply peaked around x = 0, but extends over a few grid sites (box profile). To avoid the determination of the number of  particles that are involved in this diffusion system, we use the notion of probability to study such system. 
 Fig.\ref{fig1} illustrates the initial probability density.
 
 \begin{figure}[htbp]
@@ -94,7 +99,7 @@ Fig.\ref{fig1} illustrates the initial probability density.
 Then we apply the finite difference form of the diffusion equation to solve the problem numerically.
 
 \begin{equation*}
-\rho(t+dt,x)=\rho(t,x)+D\frac{\Delta t}{{\Delta x}^2}[\rho(t,x+dx)+\rho(t,x-dx)-2\rho(t,x)]
+\rho(t+dt,x)=\rho(t,x)+D\frac{\Delta t}{{(\Delta x)}^2}[\rho(t,x+dx)+\rho(t,x-dx)-2\rho(t,x)]
 \end{equation*}
 
 After that, we fit the calculated densities at later time equal to 50s, 100s, 300s, 500s and 900s corresponding to a Normal Distribution with $\sigma(t)=\sqrt{2Dt}$.
@@ -109,9 +114,10 @@ After that, we fit the calculated densities at later time equal to 50s, 100s, 30
 \end{center}
 \end{figure}
 
-Fig.\ref{fig2} shows the results. As it can be seen from raw eyes that all the numerically calculated densities can be fitted well by the the normal distribution with $\sigma(t)=\sqrt{2Dt}$.
+Fig.\ref{fig2} shows the results.  Over these 5 different time snapshots, significant changes of the distribution are visible. The peak of the density of probability  spreads out with time.
+And it can be seen from raw eyes that all the numerically calculated densities overlaps well with the the normal distribution with $\sigma(t)=\sqrt{2Dt}$.
 
-We could also compare the fitting parameter with the idea Normal Distribution with $\sigma(t)=\sqrt{2Dt}$. Table.\ref{table1} contains these values. By comparing the analytical and fit results we can verified that the numerically calculated density profile corresponds to a Normal Distribution with $\sigma(t)=\sqrt{2Dt}$ at later times. 
+To be more precise, we could also compare the fitting parameter with the idea Normal Distribution with $\sigma(t)=\sqrt{2Dt}$. Table.\ref{table1} contains these values. By comparing the analytical and fit results we can verified that the numerically calculated density profile corresponds to a Normal Distribution with $\sigma(t)=\sqrt{2Dt}$ at later times. 
 
 \begin{table}[htdp]
 \caption{Analytical and fit parameters for density distribution}
@@ -170,7 +176,83 @@ For the last part of the question, we average the densities over 100 trials usin
 
 \subsection{Results}
 
+\section{Modified method for Gas mixing problem}
+\subsection{Method}
+The normal way to do this question can be done by the following ways: 
 
+\begin{itemize}
+\item Find the position of the gas particle randomly
+\item move the gas particle randomly. 
+\end{itemize}
+
+As the definition of our movement, if the positions  around the particle has no empty states, then this particle would not be move. This is an waste iteration in the algorithm. According to this, we can add one acceleration method to this problem. That is only selecting the gas particle which its around have at least one empty states randomly. 
+
+On the other hand, let's we consider more about this question. The gas particle only move to the empty direction randomly. When this move happened, the coordinate of the gas states and the empty states exchanged. So this question is basic equal to the empty states move randomly. 
+
+If we think like this, we can solve this question by the following ways:
+
+\begin{itemize}
+\item find the position of the empty states randomly
+\item move the empty states randomly.
+\end{itemize}
+
+The same as the acceleration of gas particle movement, we can still cancel the waste iteration by just choose the empty states randomly for those which its neighbor have at least one gas states. 
+
+According to this, our code is like below (the choice function and the move function): 
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=14cm]{code-3.png}
+\caption{The choice function and the move function of the empty states.}
+\label{choice}
+\end{center}
+\end{figure}
+
+The choice function give you the coordinates of the randomly choice empty states positions, and then move functions according to this coordinates to change the matrix of all gas states and empty states. 
+
+As in the choice and the move, we would encounter the problem about the boundary (the movement of the corner or the axis). In this question, we still permit the code to randomly choose that direction to move, but we don't change the matrix at all. You can see that is another waste iteration. 
+By this, we do not need to specify the corner atoms or axis atoms specifically. But just change the matrix if the gas/empty states can move.
+
+The logic is like below:
+\begin{itemize}
+\item if we randomly choose the +y direction to move, we only change the gas/empty states which its y corrdinate is lower than the boundry(ny-1 in the code).
+\begin{itemize}
+\item The reason for that is if we randomly choosing y coordinate is in the +y boundary, and the randomly choice direction to move is +y, then this move cannot happen, we don't change anything.
+\end{itemize}
+\item if we randomly choose the -y direction to move, we only change the gas/empty states which its y corrdinate is higher than the boundry(0 in the code).
+\item if we randomly choose the +x direction to move, we only change the gas/empty states which its x corrdinate is lower than the boundry(0 in the code).
+\item if we randomly choose the -x direction to move, we only change the gas/empty states which its x corrdinate is higher than the boundry(0 in the code).
+\end{itemize}
+
+The whole solution code is like below: 
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=8cm]{code-3-2.png}
+\caption{solution iteration of the code.}
+\label{default}
+\end{center}
+\end{figure}
+
+\subsection{Gas Mixing-problem (c) based on modified method}
+
+For the Mixing-problem, when we use the acceleration method, we can get the mixing states more quickly, we use 60$\times$40 parts as a test case, For this case, we only need 10$^6$ iterations (the normal method needs 10$^7$ iterations to get this states) to get the whole mixing states like below:
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=10cm]{M15-6}
+\caption{The gas mixing of 60$\times$40 dimension grids, blue stands for gas A, red stands for gas B, and green stands for the empty.}
+\label{default}
+\end{center}
+\end{figure}
+
+
+We difine the density like below, for each x grid point (x coordinate), accumulate all the y coordinate, get the number of gas A or gas B numbers. Then use this number divided by the whole gas A or gas B numbers. The density is show like below:
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=10cm]{D15-6}
+\caption{The density of 60$\times$40 dimension grids when it close to the whole mixing states. }
+\label{default}
+\end{center}
+\end{figure}
 
 
 
